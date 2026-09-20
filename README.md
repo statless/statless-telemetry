@@ -24,10 +24,10 @@
     <img src="https://img.shields.io/badge/bundle-%3C2KB%20gzipped-8B5CF6?style=flat-square" alt="Bundle size under 2KB gzipped" />
   </a>
   <a href="collector/pyproject.toml">
-    <img src="https://img.shields.io/badge/Python-3.13%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.13 or newer" />
+    <img src="https://img.shields.io/badge/Python-3.14%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.14 or newer" />
   </a>
   <a href="packages/sdk/package.json">
-    <img src="https://img.shields.io/badge/Node-18.17%2B-339933?style=flat-square&amp;logo=node.js&amp;logoColor=white" alt="Node.js 18.17 or newer" />
+    <img src="https://img.shields.io/badge/Node-22%2B-339933?style=flat-square&amp;logo=node.js&amp;logoColor=white" alt="Node.js 22 or newer" />
   </a>
 </p>
 
@@ -39,7 +39,7 @@
 
 statless-telemetry is a self-hostable collector plus a tiny client SDK for **developer CLI usage**, **`npx` script executions**, and **npm package version adoption**. The SDK is one fire-and-forget `POST`; the collector is a single FastAPI service that stores pings in SQLite (PostgreSQL optional) and exposes JSON aggregates.
 
-**Stack:** SDK MIT · collector AGPLv3 · TypeScript (ESM + CJS via tsup) · Python 3.13+ · FastAPI 0.115+ · SQLite (default) / PostgreSQL
+**Stack:** SDK MIT · collector AGPLv3 · TypeScript (ESM + CJS via tsup) · Python 3.14+ · FastAPI 0.115+ · SQLite (default) / PostgreSQL
 
 ## Why statless-telemetry
 
@@ -95,6 +95,8 @@ statless-telemetry/
 │       ├── src/environment.ts # OS, Node runtime, CI, opt-out detection
 │       └── src/transport.ts # native fetch with AbortSignal.timeout
 ├── LICENSE                  # AGPLv3 (collector)
+├── LICENSING.md             # path -> license table (AGPL collector / MIT SDK)
+├── CONTRIBUTING.md          # DCO sign-off + relicensing grant
 └── README.md
 ```
 
@@ -432,7 +434,7 @@ uv run ruff check app tests
 uv run uvicorn app.main:app --reload
 ```
 
-**SDK** (requires Node 18.17+):
+**SDK** (requires Node 22+):
 
 ```bash
 cd packages/sdk
@@ -464,4 +466,6 @@ The workflow runs typecheck, build, the bundle-size gate, and tests before `npm 
 - **SDK** ([`packages/sdk`](packages/sdk)): [MIT](packages/sdk/LICENSE) - drop it into any CLI, including closed-source ones.
 - **Collector** (everything else): [AGPLv3](LICENSE) - run it as a service; if you modify and network-host it, share your changes.
 
-See [`LICENSE`](LICENSE) for the full collector license text.
+See [`LICENSE`](LICENSE) for the full collector license text. This repository is
+multi-licensed by path - the full path -> license table is in
+[`LICENSING.md`](LICENSING.md).

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 import type { TelemetryPayload } from "./index";
 
 /** Hard upper bound on the network round trip, in milliseconds. */

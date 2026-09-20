@@ -23,6 +23,7 @@ Closes #
 
 ## Checklist
 
+- [ ] All commits signed off with `git commit -s` (Developer Certificate of Origin) — see [CONTRIBUTING.md](CONTRIBUTING.md)
 - [ ] Tests added or updated for behavior changes
 - [ ] SDK bundle still under the 2KB gzipped budget (`npm run size`)
 - [ ] No secrets, tokens, or raw IPs added

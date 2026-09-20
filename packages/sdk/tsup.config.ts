@@ -7,7 +7,8 @@ export default defineConfig({
   clean: true,
   minify: true,
   treeshake: true,
-  target: "node18",
+  target: "node22",
+  banner: { js: "// SPDX-License-Identifier: MIT" },
   sourcemap: false,
   outExtension({ format }) {
     return { js: format === "cjs" ? ".cjs" : ".js" };

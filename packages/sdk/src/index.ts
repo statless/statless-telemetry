@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * statless-telemetry - zero-dependency usage telemetry for developer CLIs.
  *

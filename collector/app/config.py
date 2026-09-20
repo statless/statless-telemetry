@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """Environment configuration for the statless-telemetry collector.
 
 All settings are overridable via environment variables:

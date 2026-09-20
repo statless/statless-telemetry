@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """FastAPI routes, rate limiting, and in-memory platform hashing.
 
 Endpoints:

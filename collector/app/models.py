@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """Pydantic v2 schemas for the telemetry ingest API.
 
 The wire contract is intentionally tiny and stable - installed clients keep

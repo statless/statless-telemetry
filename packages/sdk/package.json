@@ -1,8 +1,9 @@
 {
   "name": "@statless/telemetry",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Zero-dependency, cookie-free usage telemetry for developer CLIs and npm packages. Opt-out aware, pseudonymous rotating hashes, works standalone or self-hosted.",
   "license": "MIT",
+  "author": "Dimitrios Xynos",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",
@@ -26,7 +27,7 @@
     "README.md"
   ],
   "engines": {
-    "node": ">=18.17"
+    "node": ">=22"
   },
   "scripts": {
     "build": "tsup",

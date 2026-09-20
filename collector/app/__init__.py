@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """statless-telemetry collector: privacy-first usage telemetry for developer CLIs."""
 
 from importlib import metadata

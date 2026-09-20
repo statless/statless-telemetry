@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * Runtime environment detection: OS, Node version, CI, and opt-outs.
  *

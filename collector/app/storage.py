@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """Async SQLite/PostgreSQL persistence layer for telemetry pings.
 
 Schema - a single ``pings`` table keeps the standalone story simple:
