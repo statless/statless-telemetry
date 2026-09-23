@@ -1,6 +1,6 @@
 {
   "name": "@statless/telemetry",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Zero-dependency, cookie-free usage telemetry for developer CLIs and npm packages. Opt-out aware, pseudonymous rotating hashes, works standalone or self-hosted.",
   "license": "MIT",
   "author": "Dimitrios Xynos",

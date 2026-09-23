@@ -4,7 +4,7 @@
  *
  * ```ts
  * import { configure, track } from "@statless/telemetry";
- * configure({ endpoint: "https://telemetry.example.com/v1/telemetry/ping" });
+ * configure({ endpoint: "https://telemetry.example.com/v1/telemetry/ping", token: "shared-secret" });
  * const started = Date.now();
  * // ... run the command ...
  * void track({ package: "mytool", version: "1.2.3", command: "build", durationMs: Date.now() - started });
@@ -52,19 +52,27 @@ export interface TrackOptions {
 export interface TelemetryConfig {
   /** Collector endpoint. Defaults to `STATLESS_TELEMETRY_URL` env var. */
   endpoint?: string;
+  /**
+   * Sent as `X-Statless-Token` when the collector requires one. Falls back to the
+   * `STATLESS_TELEMETRY_TOKEN` env var, read at call time.
+   */
+  token?: string;
   /** Set `false` to disable telemetry for the whole process. */
   enabled?: boolean;
 }
 
 /** Public hosted collector endpoint reference. */
-export const DEFAULT_HOSTED_ENDPOINT = "https://telemetry.statless.dev/v1/telemetry/ping";
+export const DEFAULT_HOSTED_ENDPOINT = "https://in.statless.dev/v1/telemetry/ping";
 
 let endpoint = endpointOverride();
+let configuredToken: string | undefined;
 let enabled = true;
 
-/** Adjust the endpoint or turn telemetry off for the whole process. */
+/** Adjust the endpoint, token, or turn telemetry off for the whole process. */
 export function configure(config: TelemetryConfig): void {
   if (typeof config.endpoint === "string") endpoint = config.endpoint;
+  // An empty string clears the override so the env var (read at call time) applies.
+  if (typeof config.token === "string") configuredToken = config.token || undefined;
   if (typeof config.enabled === "boolean") enabled = config.enabled;
 }
 
@@ -100,5 +108,5 @@ export function track(options: TrackOptions): Promise<void> {
     payload.duration_ms = Math.max(0, Math.round(options.durationMs));
   }
 
-  return send(targetEndpoint, payload, ingestToken());
+  return send(targetEndpoint, payload, configuredToken ?? ingestToken());
 }
