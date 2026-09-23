@@ -390,7 +390,7 @@ Collector settings are environment variables. With Docker Compose, add them to t
 | `RATE_LIMIT` | `120` | Pings per minute per client (0 disables). Over-limit requests get `429`, keyed on the socket IP |
 | `RETENTION_DAYS` | `180` | Auto-delete pings older than this (GDPR Art. 5(1)(e) storage limitation). `0` disables automatic deletion |
 | `STATS_TOKEN` | *(empty = public)* | When set, `/v1/stats`, `/v1/overview`, and `/v1/export` require `?token=<value>` or the `X-Stats-Token` header (header preferred - query strings end up in access logs). Also gates `DELETE /v1/packages/{package}` |
-| `INGEST_TOKEN` | *(empty = open)* | When set, `/v1/telemetry/ping` requires `X-Statless-Token: <value>` or `Authorization: Bearer <value>`. The SDK sends it from `STATLESS_TELEMETRY_TOKEN` |
+| `INGEST_TOKEN` | *(empty = open)* | When set, `/v1/telemetry/ping` requires `X-Statless-Token: <value>` or `Authorization: Bearer <value>`. The SDK sends it from `STATLESS_TELEMETRY_TOKEN` or `configure({ token })` |
 | `TELEMETRY_ENABLED` | `true` | When `false`, the collector accepts and silently drops pings (`204`) |
 | `CONTROLLER_NAME` | `statless-telemetry operator` | Legal entity or maintainer name displayed in `/privacy` notice |
 | `CONTROLLER_CONTACT` | *(empty)* | Contact email or URL for privacy inquiries in `/privacy` notice |
@@ -408,7 +408,7 @@ Collector settings are environment variables. With Docker Compose, add them to t
 | Var | Default | Purpose |
 |---|---|---|
 | `STATLESS_TELEMETRY_URL` | *(empty = dormant)* | Ingest endpoint URL (e.g. your own `https://telemetry.example.com/v1/telemetry/ping`) |
-| `STATLESS_TELEMETRY_TOKEN` | *(empty)* | Sent as `X-Statless-Token` when the collector sets `INGEST_TOKEN` |
+| `STATLESS_TELEMETRY_TOKEN` | *(empty)* | Sent as `X-Statless-Token` when the collector sets `INGEST_TOKEN`. Overridden by `configure({ token })` |
 | `DO_NOT_TRACK` | *(empty)* | `1` disables the SDK entirely |
 | `STATLESS_OPTOUT` | *(empty)* | `1` disables the SDK entirely |
 

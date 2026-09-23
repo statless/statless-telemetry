@@ -10,8 +10,9 @@ npm install @statless/telemetry
 ```ts
 import { configure, track } from "@statless/telemetry";
 
-// Configure your collector endpoint (or set STATLESS_TELEMETRY_URL)
-configure({ endpoint: "https://telemetry.example.com/v1/telemetry/ping" });
+// Configure your collector endpoint and token (or set
+// STATLESS_TELEMETRY_URL / STATLESS_TELEMETRY_TOKEN)
+configure({ endpoint: "https://telemetry.example.com/v1/telemetry/ping", token: "shared-secret" });
 
 const started = Date.now();
 // ... run the command ...
@@ -25,8 +26,9 @@ void track({
 
 By default, telemetry remains dormant until an endpoint is explicitly configured with
 `configure({ endpoint })`, `track({ endpoint })`, or the `STATLESS_TELEMETRY_URL`
-environment variable. Private collectors that set `INGEST_TOKEN` are supported with
-`STATLESS_TELEMETRY_TOKEN`.
+environment variable. A private collector that sets `INGEST_TOKEN` is supported with
+`configure({ token })` or `STATLESS_TELEMETRY_TOKEN`; a configured token wins, and the
+environment variable is read at call time so it remains the fallback.
 
 ## Privacy & Legal Compliance
 

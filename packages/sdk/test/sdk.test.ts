@@ -28,7 +28,7 @@ beforeEach(() => {
   delete process.env.STATLESS_TELEMETRY_TOKEN;
   delete process.env.CI;
   delete process.env.GITHUB_ACTIONS;
-  configure({ enabled: true, endpoint: TEST_ENDPOINT });
+  configure({ enabled: true, endpoint: TEST_ENDPOINT, token: "" });
 });
 
 afterEach(() => {
@@ -70,6 +70,25 @@ describe("track", () => {
     await track({ package: "my-cli", version: "1.0.0" });
     expect((calls[0]!.init.headers as Record<string, string>)["x-statless-token"]).toBe(
       "shared-secret",
+    );
+  });
+
+  it("sends the token set via configure", async () => {
+    configure({ token: "from-config" });
+    const { calls } = mockFetch();
+    await track({ package: "my-cli", version: "1.0.0" });
+    expect((calls[0]!.init.headers as Record<string, string>)["x-statless-token"]).toBe(
+      "from-config",
+    );
+  });
+
+  it("prefers the configured token over the environment", async () => {
+    process.env.STATLESS_TELEMETRY_TOKEN = "from-env";
+    configure({ token: "from-config" });
+    const { calls } = mockFetch();
+    await track({ package: "my-cli", version: "1.0.0" });
+    expect((calls[0]!.init.headers as Record<string, string>)["x-statless-token"]).toBe(
+      "from-config",
     );
   });
 
@@ -153,6 +172,6 @@ describe("track", () => {
     expect(isOptedOut()).toBe(false);
     process.env.STATLESS_OPTOUT = "1";
     expect(isOptedOut()).toBe(true);
-    expect(DEFAULT_HOSTED_ENDPOINT).toBe("https://telemetry.statless.dev/v1/telemetry/ping");
+    expect(DEFAULT_HOSTED_ENDPOINT).toBe("https://in.statless.dev/v1/telemetry/ping");
   });
 });
